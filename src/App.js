@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from "react";
+import Accordion from "./components/Accordion";
+import SearchList from "./components/Search"
+import DropDown from "./components/DropDown";
+import Translate from "./components/Translate";
+import Route from "./components/Route";
+import Headers from "./components/Headers";
 
 function App() {
+
+  const items=[
+    {
+    name:"red",
+    ages:19
+    },
+    {
+      name:"yellow",
+      ages:24
+    },
+    {
+      name:"green",
+      ages:24
+    }
+
+  ];
+
+  const[stae,sets]=useState(items[0])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Headers/>
+      <Route path="/">
+        <Accordion item={items}/>
+      </Route>
+      <Route path="/searchlist">
+        <SearchList/>
+      </Route>
+      <Route path="/dropdown">
+        <DropDown label="choose a color" item={items} stae={stae} sets={sets}/>
+      </Route>
+      <Route path="/translate">
+        <Translate/>
+      </Route>
     </div>
   );
 }
